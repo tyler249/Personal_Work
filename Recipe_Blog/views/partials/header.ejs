@@ -1,0 +1,150 @@
+<!-- add all the stuff that should be on every page (banner, beginning html stuff) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- connect to the css -->
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>Recipe Forum</title>
+</head>
+
+<!-- banner at the top of all of the pages -->
+<div id="titleBanner">
+<h1>Recipe Forum</h1>
+<nav>
+    <!-- home and new post buttons -->
+    <a href="/">Home</a>
+    <a href="/form">New Post</a>
+    <!-- register and login buttons -->
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
+    <!-- profile button -->
+    <a href="/profile">Profile</a>
+    <!-- if on the home page, put the tags dropdown in the banner -->
+    <!-- the if statement checks a variable called currentPage -->
+    <% if (locals.currentPage) { %>
+    <form action="/" method="GET" class="filterForm">
+        <!-- dropdown to filter recipes by dietary tag -->
+        <div class="dropdown">
+            <label for="tag">Dietary Tag:</label>
+            <select name="tag" id="tag">
+            <option value="all">All</option>
+            <% tags.forEach(function(tag) { %>
+                <option value="<%= tag %>"><%= tag %></option>
+            <% }) %>
+            </select>
+        </div>
+        <!--  dropdown to filter recipes by cuisine type -->
+        <div class="dropdown">
+            <label for="cuisineTag">Cuisine:</label>
+            <select name="cuisine" id="cuisine">
+            <option value="all">All</option>
+            <% cuisineTypeTags.forEach(function(cuisineTag) { %>
+                <option value="<%= cuisineTag %>"><%= cuisineTag %></option>
+            <% }) %>
+            </select>
+        </div>
+        <!-- dropdown to filter recipes by meal type -->
+        <div class="dropdown">
+            <label for="mealType">Meal Type:</label>
+            <select name="mealType" id="mealType">
+            <option value="all">All</option>
+            <% mealTypeTags.forEach(function(mealTag) { %>
+                <option value="<%= mealTag %>"><%= mealTag %></option>
+            <% }) %>
+            </select>
+        </div>
+        <!-- filter for rating -->
+        <label for="minRating">Min Rating:</label>
+        <select name="minRating" id="minRating">
+        <option value="">Any</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        </select>
+        <!-- filter for difficulty -->
+        <label for="difficulty">Difficulty:</label>
+        <select name="difficulty">
+            <option value="">All</option>
+            <% for (let i = 1; i <= 5; i++) { %>
+            <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>
+        <!-- filter for cook time -->
+        <input type="number" name="minTime" placeholder="Min time (min)">
+        <input type="number" name="maxTime" placeholder="Max time (min)">
+        <!-- search bar with autocomplete -->
+        <div class="searchWrapper">
+        <input type="text" 
+                name="search"
+                id="searchInput"
+                placeholder="Search keyword/ingredient"
+                autocomplete="off">
+
+        <div id="autocompleteBox" class="autocomplete-box"></div>
+        </div>
+        <!-- submit button -->
+        <button type="submit">Filter</button>
+        </form>
+
+    <% } %>
+
+    <!-- Autocomplete script -->
+    <script>
+    // listen for input in the search bar
+    document.addEventListener("DOMContentLoaded", () => {
+        // get references to the search input and autocomplete box
+        const searchInput = document.getElementById("searchInput");
+        const box = document.getElementById("autocompleteBox");
+        let timeout;
+
+        // on input, fetch autocomplete suggestions
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.trim();
+            clearTimeout(timeout);
+
+            // if query is empty, clear box and return
+            if (!query) {
+            box.innerHTML = "";
+            return;
+            }
+
+            // delay fetch to avoid too many requests
+            timeout = setTimeout(() => {
+                fetch(`/autocomplete?query=${encodeURIComponent(query)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        box.innerHTML = "";
+
+                        // populate box with suggestions
+                        data.forEach(item => {
+                            const div = document.createElement("div");
+                            div.className = "autocomplete-item";
+                            div.textContent = item.title;
+                            div.onclick = () => {
+                            searchInput.value = item.title;
+                            box.innerHTML = "";
+                            };
+                            box.appendChild(div);
+                        });
+                    });
+            }, 150);
+        });
+
+        // hide box when clicking outside
+        document.addEventListener("click", (e) => {
+            if (!searchInput.contains(e.target)) {
+            box.innerHTML = "";
+            }
+        });
+    });
+    </script>
+
+</nav>
+</div>
+
+<main>
