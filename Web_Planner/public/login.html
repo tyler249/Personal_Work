@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="homeStyle.css">
+    </head>
+    <script src="nav.js"></script>
+    <script src="../pipelines/auth.pipeline.js"></script>
+    <body>
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="#" onclick='toHome()'>Home</a></li>
+                <li><a href="#" onclick='toCalendar()'>Calendar</a></li>
+                <li><a href="#" onclick='toInput()'>Input</a></li>
+                <li><a href="#">Login</a></li>
+                <li id="userDisplay">User: Guest</li>
+            </ul>
+        </nav>
+
+        <p>Login</p>
+        <label for="user">Username</label>
+        <input type="text" id="user" name="user"><br><br>
+
+        <label for="pass">Password</label>
+        <input type="password" id="pass" name="pass"><br><br>
+
+        <button id="loginButton" onclick="login()">Submit</button>
+        <p id="loginMessage"></p> 
+
+        <br><br><br><br>
+
+        <p>Signup</p>
+        <label for="userSign">Username</label>
+        <input type="text" id="userSign" name="userSign"><br><br>
+
+        <label for="passSign">Password</label>
+        <input type="password" id="passSign" name="passSign"><br><br>
+
+        <label for="passConf">Confirm Password</label>
+        <input type="password" id="passConf" name="passConf"><br><br>
+
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email"><br><br>
+
+        <button id="signupButton" onclick="signup()">Submit</button>
+        <p id="signupMessage"></p> 
+
+    </body>
+</html>

@@ -1,0 +1,41 @@
+/* Reset some default styles */
+body, ul, li, a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+/* Navigation bar styling */
+.navbar {
+    background-color: #a1c3d1; /* Baby blue color */
+    padding: 20px 40px;
+}
+
+/* Navigation list styling */
+.nav-list {
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+}
+
+.nav-list li {
+    margin-right: 10%; /* Space between items */
+}
+
+.nav-list li:last-child {
+    margin-right: 0; /* Remove margin for the last item */
+}
+
+.nav-list li a {
+    color: white; /* Text color */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-list li a:hover {
+    background-color: #85b2c1; /* Slightly darker baby blue on hover */
+    border-radius: 4px;
+}

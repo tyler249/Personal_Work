@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="homeStyle.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="#" onclick='toHome()'>Home</a></li>
+                <li><a href="#" onclick='toCalendar()'>Calendar</a></li>
+                <li><a href="#">Input</a></li>
+                <li><a href="#" onclick='toLogin()'>Login</a></li>
+                <li id="userDisplay">User: Guest</li>
+            </ul>
+        </nav>
+
+        <h2>Submit Event</h2>
+        <label for="eventName">Name</label>
+        <input type="text" id="eventName" name="eventName"><br><br>
+
+        <label for="eventDesc">Description</label>
+        <input type="text" id="eventDesc" name="eventDesc"><br><br>
+
+        <label for="eventDate">Date</label>
+        <input type="date" id="eventDate" name="eventDate"><br><br>
+
+        <label for="eventTime">Time</label>
+        <input type="time" id="eventTime" name="eventTime"><br><br>
+
+        <label for="types">Type</label>
+        <select id="types">
+            <option value="" disabled selected>Select a Type</option>
+        </select><br><br>
+
+        <button id="submitEvent" disabled>Submit Event</button>
+        <p id="eventMessage"></p>
+
+        <h2>Create Type</h2>
+        <label for="typeName">Name</label>
+        <input type="text" id="typeName" name="typeName"><br><br>
+
+        <label for="typeColor">Color</label>
+        <input type="color" id="typeColor" name="typeColor"><br><br>
+
+        <label for="priority">Priority</label>
+        <select id="priority">
+            <option value="1">Low</option>
+            <option value="2">Medium</option>
+            <option value="3">High</option>
+        </select><br><br>
+
+        <button id="submitType">Submit Type</button>
+
+        <script src="nav.js"></script>
+        <script src="input.js"></script>
+    </body>
+</html>
